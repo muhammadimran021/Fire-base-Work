@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "143343881215",
+    "firebase_url": "https://authentication-55e11.firebaseio.com",
+    "project_id": "authentication-55e11",
+    "storage_bucket": "authentication-55e11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143343881215:android:3fde36cfefdc6c0a",
+        "android_client_info": {
+          "package_name": "com.example.muhammadimran.openpdf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143343881215-ci5f3n11aj6nmt2qfbt7hl87rv4bfiue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi-dMUQBPkoaJLhiUiAfZTHxwQAPmqbv8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

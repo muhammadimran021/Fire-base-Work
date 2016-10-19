@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "738344358775",
+    "firebase_url": "https://databaseapp-a962e.firebaseio.com",
+    "project_id": "databaseapp-a962e",
+    "storage_bucket": "databaseapp-a962e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738344358775:android:0ba4ac8180d5f487",
+        "android_client_info": {
+          "package_name": "com.example.muhammadimran.imageupload"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738344358775-6fpr8si8lia9e3mpvqtjf6i4s487fv7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGHpmjZypRsaUCE4OaAtzgdmndkiVWRZw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

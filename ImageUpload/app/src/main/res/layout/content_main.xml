@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.muhammadimran.imageupload.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+<ImageView
+    android:id="@+id/imageview"
+    android:layout_width="match_parent"
+    android:layout_height="200dp" />
+    <Button
+        android:id="@+id/uploadImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Upload Image On Fire Base! "/>
+    <ImageView
+        android:id="@+id/imagedownload"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Download Image"
+        android:id="@+id/DowmloadButton"/>
+
+
+</LinearLayout>

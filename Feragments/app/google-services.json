@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "872363092709",
+    "firebase_url": "https://auth-c2e3d.firebaseio.com",
+    "project_id": "auth-c2e3d",
+    "storage_bucket": "auth-c2e3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872363092709:android:eaf687adad7e0dc3",
+        "android_client_info": {
+          "package_name": "com.example.imran.feragments"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872363092709-1hnpkamvhn0dvk3eclv1tjjh28nfs2c0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ6C4pWRxSFHt5y8G3LmUI9OnaDw93hsE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
