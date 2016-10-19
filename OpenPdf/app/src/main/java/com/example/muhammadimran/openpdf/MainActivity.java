@@ -48,7 +48,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    private int SAVE_REQUEST_CODE = 1;
+    public static final int SAVE_REQUEST_CODE = 1;
     private Button UploadButton, DownloadButton;
     private ImageView pdficon;
     private DatabaseReference mDatabas;
@@ -57,9 +57,8 @@ public class MainActivity extends AppCompatActivity {
     private String firebaseUrl;
     private HashMap<String, String> hashMap = new HashMap<>();
     private ProgressDialog pDialog;
-    String path;
-
     private TextView filename;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("*/*");
+                intent.setType("files/*");
                 startActivityForResult(intent, SAVE_REQUEST_CODE);
 
             }
@@ -156,10 +155,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SAVE_REQUEST_CODE && resultCode == RESULT_OK) {
+        switch (requestCode) {
+            case SAVE_REQUEST_CODE:
+                if (resultCode == RESULT_OK) {
+                    pathUri = data.getData();
+                    String FilePath = pathUri.getPath();
 
-            pathUri = data.getData();
-            Log.d("TAG", "asdrfds" + pathUri);
+                    Log.d("TAg", "dsfasfsda " + FilePath);
+                    // for_name_display.setText(FilePath);
+                }
+                break;
+
         }
 
     }
@@ -213,14 +219,19 @@ public class MainActivity extends AppCompatActivity {
 
                 String filepath = Environment.getExternalStorageDirectory() + "/imranFiles/";
 
+                //for get a file name
                 String urlExtention = String.valueOf(httpURLConnection);
-                urlExtention = urlExtention.substring(urlExtention.lastIndexOf("%")).substring(1, 9);
+                urlExtention = urlExtention.substring(urlExtention.lastIndexOf(".")).substring(0, 4);
 
 
                 Log.d("TAG", "values of url : " + urlExtention);
                 Log.d("TAG", "Params : " + params.toString());
-                String firebasefile = params.toString();
-                File file = new File(filepath, firebasefile + ".pdf");
+
+                //for get a file name
+                String urlExtention1 = String.valueOf(httpURLConnection);
+                urlExtention1 = urlExtention1.substring(urlExtention1.lastIndexOf("%")).substring(3, urlExtention1.indexOf(".") - 2);
+
+                File file = new File(filepath, urlExtention1 + urlExtention);
                 if (!file.getParentFile().mkdirs()) {
                     file.getParentFile().mkdirs();
                 }

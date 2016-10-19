@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.setType("application/*");
+                intent.setType("*/*");
                 startActivityForResult(intent, REQUEST);
 
             }
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
 
                 mImageUri = result.getUri();
 
-
+                Log.d("TAG", "val : " + mImageUri);
                 imageView.setImageURI(mImageUri);
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
