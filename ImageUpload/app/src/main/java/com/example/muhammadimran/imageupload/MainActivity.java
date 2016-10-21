@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.setType("*/*");
+                intent.setType("image/*");
                 startActivityForResult(intent, REQUEST);
 
             }
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                StorageReference storage = mStorage.child("Images").child(mImageUri.toString());
+                StorageReference storage = mStorage.child("Images").child(mImageUri.getLastPathSegment().toString());
                 storage.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         pDialog = new ProgressDialog(this);
@@ -76,12 +77,14 @@ public class MainActivity extends AppCompatActivity {
 //////////////////////////////////////////////////////////////////////
         pdficon = (ImageView) findViewById(R.id.pdfImage);
         UploadButton = (Button) findViewById(R.id.pdf_Upload_Button);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("files/*");
+                intent.setType("application/*");
                 startActivityForResult(intent, SAVE_REQUEST_CODE);
 
             }
@@ -155,20 +158,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case SAVE_REQUEST_CODE:
-                if (resultCode == RESULT_OK) {
-                    pathUri = data.getData();
-                    String FilePath = pathUri.getPath();
 
-                    Log.d("TAg", "dsfasfsda " + FilePath);
-                    // for_name_display.setText(FilePath);
-                }
-                break;
+//        switch (requestCode) {
 
+        if (requestCode == SAVE_REQUEST_CODE) {
+            pathUri = data.getData();
         }
+//            case SAVE_REQUEST_CODE:
+//                if (resultCode == RESULT_OK) {
+//                    pathUri = data.getData();
+//                    String FilePath = pathUri.getPath();
+//
+//                    Log.d("TAg", "dsfasfsda " + FilePath);
+//                    // for_name_display.setText(FilePath);
+//                }
+//                break;
 
     }
+
+//  }
 
     @Override
     protected void onStart() {
@@ -183,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
         if (pathUri != null) {
             pdficon.setVisibility(View.VISIBLE);
             filename.setVisibility(View.VISIBLE);
-            filename.setText(pathUri.getLastPathSegment().toString());
+            filename.setText(pathUri.toString());
         }
 
     }
