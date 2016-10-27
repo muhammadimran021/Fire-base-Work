@@ -73,14 +73,9 @@ public class SignUp extends Fragment {
             @Override
             public void onClick(View v) {
                 final String userfname = fname.getText().toString();
-                String userlname = lname.getText().toString();
+                final String userlname = lname.getText().toString();
                 final String user_email = email.getText().toString();
                 final String user_password = password.getText().toString();
-
-                hashMap.put("firstname", userfname);
-                hashMap.put("lastname", userlname);
-                hashMap.put("userEmail", user_email);
-                hashMap.put("userPassword", user_password);
 
                 mAuth.createUserWithEmailAndPassword(user_email, user_password)
                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -88,7 +83,15 @@ public class SignUp extends Fragment {
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if (task.isSuccessful()) {
+
                                     String current_key = task.getResult().getUser().getUid().toString();
+
+                                    hashMap.put("UUID", current_key);
+                                    hashMap.put("firstname", userfname);
+                                    hashMap.put("lastname", userlname);
+                                    hashMap.put("userEmail", user_email);
+                                    hashMap.put("userPassword", user_password);
+
                                     mDatabase.child("User-info").child(current_key).setValue(hashMap);
                                     Toast.makeText(getContext(), "User Created", Toast.LENGTH_SHORT).show();
 

@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.imran.feragments.R;
+import com.example.imran.feragments.Services.MyService;
 import com.example.imran.feragments.User_todo_pkg.User_Todo;
 import com.example.imran.feragments.UserinfoAndTodo;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -52,23 +53,23 @@ public class SignInFragment extends Fragment {
         userpassword = (EditText) view.findViewById(R.id.Userpassword_text);
 
 
-        mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Intent it = new Intent(getActivity(), UserinfoAndTodo.class);
-                    startActivity(it);
-                    getActivity().finish();
-
-                    Log.d("TAG", "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d("TAG", "onAuthStateChanged:signed_out");
-                }
-            }
-        });
+//        mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user != null) {
+//                    // User is signed in
+//                    Intent it = new Intent(getActivity(), UserinfoAndTodo.class);
+//                    startActivity(it);
+//                    getActivity().finish();
+//
+//                    Log.d("TAG", "onAuthStateChanged:signed_in:" + user.getUid());
+//                } else {
+//                    // User is signed out
+//                    Log.d("TAG", "onAuthStateChanged:signed_out");
+//                }
+//            }
+//        });
 
 
         sign_in = (Button) view.findViewById(R.id.User_SigninButton);
@@ -92,6 +93,7 @@ public class SignInFragment extends Fragment {
                                     Intent i = new Intent(getActivity(), UserinfoAndTodo.class);
                                     startActivity(i);
                                     getActivity().finish();
+//                                    new MyService().onStartCommand(i,0, 0);
                                 } else if (!task.isSuccessful()) {
                                     Log.w("TAG", "signInWithEmail:failed", task.getException());
                                     Toast.makeText(getActivity(), "Denied", Toast.LENGTH_SHORT).show();

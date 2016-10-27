@@ -6,13 +6,14 @@ package com.example.imran.feragments.User_Fragments;
 
 public class UserInfoModules {
 
+    private String UUID;
     private String firstname;
     private String lastname;
     private String userEmail;
     private String userPassword;
 
-    public UserInfoModules(String firstname, String lastname, String userEmail, String userPassword) {
-
+    public UserInfoModules(String UUID, String firstname, String lastname, String userEmail, String userPassword) {
+        this.UUID = UUID;
         this.firstname = firstname;
         this.lastname = lastname;
         this.userEmail = userEmail;
@@ -20,6 +21,14 @@ public class UserInfoModules {
     }
 
     public UserInfoModules() {
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
     }
 
     public String getFirstname() {

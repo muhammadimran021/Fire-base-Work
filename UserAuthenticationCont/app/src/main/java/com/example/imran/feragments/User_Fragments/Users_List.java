@@ -1,6 +1,7 @@
 package com.example.imran.feragments.User_Fragments;
 
 
+import android.app.Notification;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.imran.feragments.R;
+import com.example.imran.feragments.Services.MyService;
+import com.example.imran.feragments.Services.ServicesModules;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +39,8 @@ public class Users_List extends Fragment {
     ArrayList<UserInfoModules> userArraylist;
     private HashMap<String, String> hashMap = new HashMap<>();
     UserInfoModules usersss;
+    String UserIdposition;
+    ArrayList<String> UserLists = new ArrayList<>();
 
     public Users_List() {
         // Required empty public constructor
@@ -65,7 +70,7 @@ public class Users_List extends Fragment {
 
                 usersss = dataSnapshot.getValue(UserInfoModules.class);
                 Log.d("valueObject", usersss.getFirstname() + "");
-                userArraylist.add(new UserInfoModules(usersss.getFirstname(), usersss.getLastname(), usersss.getUserEmail(), usersss.getUserPassword()));
+                userArraylist.add(new UserInfoModules(usersss.getUUID(), usersss.getFirstname(), usersss.getLastname(), usersss.getUserEmail(), usersss.getUserPassword()));
                 adapter.notifyDataSetChanged();
 
             }
@@ -95,6 +100,20 @@ public class Users_List extends Fragment {
         Userlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                mAuth = FirebaseAuth.getInstance();
+
+                Log.d("TAG", "Id : " + id);
+                Log.d("TAG", "Position : " + position);
+
+//                for (int i=0; i> UserLists.get(position).length() ; i++){
+//                    UserIdposition = UserLists.get(i);
+//                }
+
+                final UserInfoModules userInfoModules = userArraylist.get(position);
+
+                Log.d("USER", "Username: " + userInfoModules.getFirstname());
+
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Send notification to postion # " + position);
                 final View view1 = LayoutInflater.from(getContext()).inflate(R.layout.notifcation_layout, null);
@@ -103,10 +122,15 @@ public class Users_List extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         EditText editText = (EditText) view1.findViewById(R.id.notification_text);
                         String getTexts = editText.getText().toString();
-                        hashMap.put("Message", getTexts);
-                        hashMap.put("PushId", mDatabase.push().getKey());
-                        hashMap.put("CurrentId", mAuth.getCurrentUser().getUid());
-                        mDatabase.child("User-notificaton").child(mAuth.getCurrentUser().getUid()).child(FirebaseInstanceId.getInstance().toString()).setValue(hashMap);
+                        String Uid = mDatabase.push().getKey();
+                        ServicesModules notificationMessage = new ServicesModules(userInfoModules.getUUID(), getTexts, Uid);
+                        mDatabase.child("user-notification").child(notificationMessage.getCurrentId()).child(notificationMessage.getPushId()).setValue(notificationMessage);
+                        Log.d("TAG", "Userdata " + mAuth.getCurrentUser().getUid() + " " + getTexts + " " + Uid);
+
+//   hashMap.put("Message", getTexts);
+//                        hashMap.put("PushId", Uid);
+//                        hashMap.put("CurrentId", mAuth.getCurrentUser().getUid());
+//                        mDatabase.child("User-notificaton").child(mAuth.getCurrentUser().getUid()).setValue(hashMap);
                     }
                 });
                 builder.setView(view1);
