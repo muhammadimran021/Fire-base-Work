@@ -7,6 +7,7 @@ import android.widget.ImageButton;
  */
 
 public class Modules {
+    private String Image;
     private String uid;
     private String name;
     private String city;
@@ -16,11 +17,20 @@ public class Modules {
     public Modules() {
     }
 
-    public Modules(String uid, String name, String city, boolean check) {
+    public Modules(String image, String uid, String name, String city, boolean check) {
+        Image = image;
         this.uid = uid;
         this.name = name;
         this.city = city;
         this.check = check;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
     }
 
     public String getUid() {

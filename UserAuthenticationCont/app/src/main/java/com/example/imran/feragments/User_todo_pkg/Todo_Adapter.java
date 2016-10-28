@@ -1,6 +1,7 @@
 package com.example.imran.feragments.User_todo_pkg;
 
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.imran.feragments.MainActivity;
 import com.example.imran.feragments.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,12 +64,14 @@ public class Todo_Adapter extends BaseAdapter {
         TextView dialogname = (TextView) view.findViewById(R.id.User_text_View);
         TextView dialogemail = (TextView) view.findViewById(R.id.Email_text_view);
         final CheckBox dialogcheck = (CheckBox) view.findViewById(R.id.ListViewBox);
+        CircularImageView mimage = (CircularImageView) view.findViewById(R.id.userimage);
 
         final Modules modules = modulesArrayList.get(position);
 
         dialogname.setText("Name: " + modules.getName());
         dialogemail.setText("City: " + modules.getCity());
         dialogcheck.setChecked(modules.isCheck());
+        Picasso.with(context).load(modules.getImage()).into(mimage);
 
 
         dialogcheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -77,7 +83,7 @@ public class Todo_Adapter extends BaseAdapter {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dialogcheck.isChecked()) {
                             mDatabase.child("User Todo").child(AuthId).child(modules.getUid()).child("check").setValue(true);
-                        }else if (!dialogcheck.isChecked()){
+                        } else if (!dialogcheck.isChecked()) {
                             mDatabase.child("User Todo").child(AuthId).child(modules.getUid()).child("check").setValue(false);
                         }
                     }

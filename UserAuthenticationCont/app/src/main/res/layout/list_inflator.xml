@@ -1,32 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="16dp">
+    android:layout_margin="16dp"
+    android:orientation="horizontal">
 
-    <TextView
-        android:padding="5dp"
-        android:id="@+id/User_text_View"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User Name" />
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/userimage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:civ_shadow="true"
+        />
 
-    <TextView
-        android:padding="5dp"
-        android:layout_below="@+id/User_text_View"
-        android:id="@+id/Email_text_view"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User Email " />
+        android:layout_height="wrap_content">
 
-    <CheckBox
-        android:focusable="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Email_text_view"
-        android:layout_alignBottom="@+id/Email_text_view"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/ListViewBox" />
-</RelativeLayout>
+        <TextView
+
+            android:id="@+id/User_text_View"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="User Name" />
+
+        <TextView
+            android:id="@+id/Email_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/User_text_View"
+            android:padding="5dp"
+            android:text="User Email " />
+
+        <CheckBox
+            android:id="@+id/ListViewBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/Email_text_view"
+            android:layout_alignBottom="@+id/Email_text_view"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:focusable="false" />
+    </RelativeLayout>
+
+</LinearLayout>
