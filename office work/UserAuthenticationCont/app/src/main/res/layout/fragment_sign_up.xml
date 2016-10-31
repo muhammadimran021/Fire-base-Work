@@ -1,0 +1,77 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context="com.example.imran.feragments.User_SignIn_Up_fragments.SignUp">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/signupimage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/prpfile" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/fnametext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/fname_text"
+            android:layout_width="253dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="First name" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/lnametext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/lname_text"
+            android:layout_width="253dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Last name" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/emailtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/email_text"
+            android:layout_width="253dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Email" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/passwordtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/password_text"
+            android:layout_width="253dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Password" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/SignUp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Sign Up" />
+
+
+</LinearLayout>
