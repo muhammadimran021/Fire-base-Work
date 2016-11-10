@@ -5,40 +5,31 @@ package com.example.imran.feragments.UsersChat;
  */
 
 public class ChatModules {
-private String UUID;
-    private String Text;
-    private String PushId;
+    private String conversationId;
+    private String userId;
 
-    public ChatModules(String UUID, String text, String pushId) {
-        this.UUID = UUID;
-        Text = text;
-        PushId = pushId;
+    public ChatModules(String conversationId, String userId) {
+        this.conversationId = conversationId;
+        this.userId = userId;
+
     }
 
     public ChatModules() {
     }
 
-    public String getUUID() {
-        return UUID;
+    public String getConversationId() {
+        return conversationId;
     }
 
-    public void setUUID(String UUID) {
-        this.UUID = UUID;
+    public void setConversationId(String conversationId) {
+        this.conversationId = conversationId;
     }
 
-    public String getText() {
-        return Text;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setText(String text) {
-        Text = text;
-    }
-
-    public String getPushId() {
-        return PushId;
-    }
-
-    public void setPushId(String pushId) {
-        PushId = pushId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

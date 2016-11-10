@@ -15,6 +15,13 @@ public class PushKey {
         this.pushId = pushId;
     }
 
+    public PushKey(String currentId, String message) {
+        this.currentId = currentId;
+        this.message = message;
+    }
+
+
+
     public PushKey() {
     }
 

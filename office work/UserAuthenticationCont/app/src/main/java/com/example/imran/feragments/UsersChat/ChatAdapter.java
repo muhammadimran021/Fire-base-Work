@@ -20,11 +20,11 @@ import java.util.ArrayList;
  */
 
 public class ChatAdapter extends BaseAdapter {
-    ArrayList<ChatModules> chatModulesArrayList;
+    ArrayList<PushKey> chatModulesArrayList;
     Context context;
     UserInfoModules userInfoModules = new UserInfoModules();
 
-    public ChatAdapter(ArrayList<ChatModules> chatModulesArrayList, Context context) {
+    public ChatAdapter(ArrayList<PushKey> chatModulesArrayList, Context context) {
         this.chatModulesArrayList = chatModulesArrayList;
         this.context = context;
     }
@@ -48,18 +48,18 @@ public class ChatAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View view1 = LayoutInflater.from(context).inflate(R.layout.chat_layout, null);
-//        CircularImageView circularImageView = (CircularImageView) view1.findViewById(R.id.UserchatImagess);
+        CircularImageView circularImageView = (CircularImageView) view1.findViewById(R.id.UserchatImagess);
         TextView Username = (TextView) view1.findViewById(R.id.UserchatName);
         TextView UserMessage = (TextView) view1.findViewById(R.id.UserchatMessage);
 //
-        ChatModules chatModules = chatModulesArrayList.get(position);
+        PushKey chatModules = chatModulesArrayList.get(position);
 //
-////        Picasso.with(context).load(userInfoModules.getUserImage()).into(circularImageView);
-//        Log.d("TAG", "Image: " + userInfoModules.getUserImage());
-        Username.setText(chatModules.getUUID());
-        UserMessage.setText(chatModules.getText());
+        Picasso.with(context).load(userInfoModules.getUserImage()).into(circularImageView);
+        Log.d("TAG", "Image: " + userInfoModules.getUserImage());
+        Username.setText("name: " + chatModules.getCurrentId());
+        UserMessage.setText("Message: " + chatModules.getMessage());
 
 
-        return null;
+        return view1;
     }
 }

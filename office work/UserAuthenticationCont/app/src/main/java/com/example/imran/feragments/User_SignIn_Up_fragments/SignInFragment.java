@@ -83,8 +83,6 @@ public class SignInFragment extends Fragment {
             public void onClick(View v) {
 
 
-
-
                 String user_Email = useremail.getText().toString();
                 String user_Password = userpassword.getText().toString();
 
@@ -112,6 +110,7 @@ public class SignInFragment extends Fragment {
 //                                    new MyService().onStartCommand(i,0, 0);
                                     } else if (!task.isSuccessful()) {
                                         Log.w("TAG", "signInWithEmail:failed", task.getException());
+                                        pd.dismiss();
                                         Toast.makeText(getActivity(), "Denied", Toast.LENGTH_SHORT).show();
                                     }
                                     // ...

@@ -17,12 +17,15 @@ import android.widget.ListView;
 import com.example.imran.feragments.R;
 import com.example.imran.feragments.Services.ServicesModules;
 import com.example.imran.feragments.UsersChat.ChatActivity;
+import com.example.imran.feragments.UsersChat.ChatModules;
+import com.example.imran.feragments.UsersChat.PushKey;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,13 +37,21 @@ public class Users_List extends Fragment {
     ListView Userlist;
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
+    private UserInfoModules usersss;
     UserInfoAdapter adapter;
-    ArrayList<UserInfoModules> userArraylist;
+    ArrayList<UserInfoModules> userArraylist = new ArrayList<>();
     private HashMap<String, String> hashMap = new HashMap<>();
+    private String push1;
     // usersss;
     String UserIdposition;
-    ArrayList<String> UserLists = new ArrayList<>();
+    ArrayList<String> chatModules = new ArrayList<>();
     UserInfoModules userInfoModules;
+    String push;
+    PushKey p;
+    String UserId;
+    HashMap<String, String> hashMap1 = new HashMap<String, String>();
+    HashMap<String, String> hashMap2 = new HashMap<String, String>();
+    String push11;
 
     public Users_List() {
         // Required empty public constructor
@@ -54,55 +65,22 @@ public class Users_List extends Fragment {
         View view = inflater.inflate(R.layout.fragment_users__list, container, false);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        //final String push = mDatabase.push().getKey();
+        push11 = mDatabase.getRef().push().getKey();
+        push1 = mDatabase.getRef().push().getKey();
 //        final UserInfoModules users = new UserInfoModules();
 
         Userlist = (ListView) view.findViewById(R.id.ListUsers);
-        userArraylist = new ArrayList<>();
         adapter = new UserInfoAdapter(getActivity(), userArraylist);
         Userlist.setAdapter(adapter);
-
-
-        mDatabase.child("User-info").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.d("TAg", "asdfasdf : " + dataSnapshot.getValue());
-
-                UserInfoModules usersss = dataSnapshot.getValue(UserInfoModules.class);
-                Log.d("valueObject", usersss.getFirstname() + "");
-                userArraylist.add(new UserInfoModules(usersss.getUUID(), usersss.getUserImage(), usersss.getFirstname(), usersss.getLastname(), usersss.getUserEmail(), usersss.getUserPassword()));
-                adapter.notifyDataSetChanged();
-                Log.d("TAG", "Images: " + usersss.getUserImage());
-                Log.d("TAG", "datasnapshot: " + dataSnapshot.getValue());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
         Userlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 mAuth = FirebaseAuth.getInstance();
-
+                //push1 = mDatabase.getRef().push().getKey();
+                //push1 = mDatabase.getRef().push().getKey();
                 Log.d("TAG", "Id : " + id);
                 Log.d("TAG", "Position : " + position);
 
@@ -110,9 +88,9 @@ public class Users_List extends Fragment {
 //                    UserIdposition = UserLists.get(i);
 //                }
 
-                userInfoModules = userArraylist.get(position);
+                UserIdposition = chatModules.get(position);
 
-                Log.d("USER", "Username: " + userInfoModules.getFirstname());
+                Log.d("USER", "Username: " + UserIdposition);
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -139,15 +117,61 @@ public class Users_List extends Fragment {
                 builder.setNegativeButton("Open chat", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent i = new Intent(getActivity(), ChatActivity.class);
-                        i.putExtra("currentId", position);
 
+
+                        UserId = mAuth.getCurrentUser().getUid();
+                        // String FriendId = userInfoModules.getUUID();
+
+
+                        Intent i = new Intent(getActivity(), ChatActivity.class);
+                        i.putExtra("currentId", UserIdposition);
                         startActivity(i);
+
 
                     }
                 });
                 builder.setView(view1);
                 builder.create().show();
+
+            }
+        });
+
+        mDatabase.child("User-info").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.d("TAg", "asdfasdf : " + dataSnapshot.getValue());
+
+                usersss = dataSnapshot.getValue(UserInfoModules.class);
+                chatModules.add(usersss.getUUID());
+
+                Log.d("valueObject", usersss.getFirstname() + "");
+
+                UserInfoModules users = new UserInfoModules(usersss.getUUID(), usersss.getUserImage(), usersss.getFirstname(), usersss.getLastname(), usersss.getUserEmail(), usersss.getUserPassword());
+                userArraylist.add(users);
+                adapter.notifyDataSetChanged();
+
+
+                Log.d("TAG", "Images: " + usersss.getUserImage());
+                Log.d("TAG", "datasnapshot: " + dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });

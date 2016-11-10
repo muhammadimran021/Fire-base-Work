@@ -7,8 +7,9 @@
 
     android:orientation="vertical"
     tools:context="com.example.imran.feragments.UsersChat.ChatActivity">
+
     <ListView
-        android:id="@+id/UserchatList"
+        android:id="@+id/UserchatList1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"></ListView>
@@ -19,7 +20,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/UserChatEditText"
+            android:id="@+id/UserChateditText1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

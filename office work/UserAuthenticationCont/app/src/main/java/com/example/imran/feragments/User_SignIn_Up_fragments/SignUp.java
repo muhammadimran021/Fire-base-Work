@@ -116,64 +116,66 @@ public class SignUp extends Fragment {
                 final String user_email = email.getText().toString();
                 final String user_password = password.getText().toString();
 
-//                if (TextUtils.isEmpty(userfname)) {
-//                    fname.setError("Required");
-//
-//                } else if (TextUtils.isEmpty(userlname)) {
-//                    lname.setError("Required");
-//
-//                } else if (TextUtils.isEmpty(user_email)) {
-//                    email.setError("Required");
-//
-//                } else if (TextUtils.isEmpty(user_password)) {
-//                    password.setError("Required");
-//
-//                } else {
+                if (TextUtils.isEmpty(userfname)) {
+                    fname.setError("Required");
+
+                } else if (TextUtils.isEmpty(userlname)) {
+                    lname.setError("Required");
+
+                } else if (TextUtils.isEmpty(user_email)) {
+                    email.setError("Required");
+
+                } else if (TextUtils.isEmpty(user_password)) {
+                    password.setError("Required");
+
+                }
 //                    pd = new ProgressDialog(getContext());
 //                    pd.setMessage("Loging in");
 //                    pd.show();
 
-                StorageReference reference = firebaseStorage.child("SignUp-images").child(ImageUri.getLastPathSegment().toString());
-                reference.putFile(ImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();
-                        signup_url = String.valueOf(taskSnapshot.getDownloadUrl());
-                    }
-                });
-                mAuth.createUserWithEmailAndPassword(user_email, user_password)
-                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    StorageReference reference = firebaseStorage.child("SignUp-images").child(ImageUri.getLastPathSegment().toString());
+                    if (reference != null) {
+                        reference.putFile(ImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();
+                                signup_url = String.valueOf(taskSnapshot.getDownloadUrl());
+                            }
+                        });
+                    }
+                    mAuth.createUserWithEmailAndPassword(user_email, user_password)
+                            .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                if (task.isSuccessful()) {
+                                    if (task.isSuccessful()) {
 
-                                    String current_key = task.getResult().getUser().getUid().toString();
+                                        String current_key = task.getResult().getUser().getUid().toString();
 
-                                    hashMap.put("UUID", current_key);
-                                    hashMap.put("firstname", userfname);
-                                    hashMap.put("lastname", userlname);
-                                    hashMap.put("userEmail", user_email);
-                                    hashMap.put("userPassword", user_password);
-                                    hashMap.put("userImage", signup_url);
+                                        hashMap.put("UUID", current_key);
+                                        hashMap.put("firstname", userfname);
+                                        hashMap.put("lastname", userlname);
+                                        hashMap.put("userEmail", user_email);
+                                        hashMap.put("userPassword", user_password);
+                                        hashMap.put("userImage", signup_url);
 
-                                    mDatabase.child("User-info").child(current_key).setValue(hashMap);
-                                    Toast.makeText(getContext(), "User Created", Toast.LENGTH_SHORT).show();
+                                        mDatabase.child("User-info").child(current_key).setValue(hashMap);
+                                        Toast.makeText(getContext(), "User Created", Toast.LENGTH_SHORT).show();
 
-                                    //if task is successfull then empty edit text!
-                                    fname.setText("");
-                                    lname.setText("");
-                                    email.setText("");
-                                    password.setText("");
+                                        //if task is successfull then empty edit text!
+                                        fname.setText("");
+                                        lname.setText("");
+                                        email.setText("");
+                                        password.setText("");
 //                                        pd.dismiss();
-                                } else if (!task.isSuccessful()) {
-                                    Toast.makeText(getContext(), "Sorry SignUp failed!", Toast.LENGTH_SHORT).show();
+                                    } else if (!task.isSuccessful()) {
+                                        Toast.makeText(getContext(), "Sorry SignUp failed!", Toast.LENGTH_SHORT).show();
+                                    }
+
                                 }
 
-                            }
-
-                        });
-                // }
+                            });
+                
             }
         });
 

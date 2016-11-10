@@ -9,7 +9,7 @@ import android.os.Bundle;
 import com.example.imran.feragments.UserInfoAndTodo.Frag_Adapter_for_User;
 import com.example.imran.feragments.User_Fragments.Users_List;
 import com.example.imran.feragments.User_todo_pkg.User_Todo;
-import com.example.imran.feragments.UsersChat.UserChat;
+//import com.example.imran.feragments.UsersChat.UserChat;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class UserinfoAndTodo extends AppCompatActivity {
 
         mmfragmentArrayList.add(0, new Users_List());
         mmfragmentArrayList.add(1, new User_Todo());
-        mmfragmentArrayList.add(2, new UserChat());
+       // mmfragmentArrayList.add(2, new UserChat());
 
         tabLayout.addTab(tabLayout.newTab().setText("User Info List"));
         tabLayout.addTab(tabLayout.newTab().setText("User Todo"));
@@ -54,7 +54,7 @@ public class UserinfoAndTodo extends AppCompatActivity {
                         new User_Todo();
                         break;
                     case 2:
-                        new UserChat();
+                       // new UserChat();
                         break;
                 }
             }
